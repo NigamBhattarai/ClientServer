@@ -5,6 +5,7 @@
  */
 package clientapp;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Point;
@@ -35,7 +36,7 @@ public class Test extends JFrame implements ActionListener{
         super("Chatting");
         pan = new JPanel();
         addField = new JTextField();
-        addButton = new JButton("Send to");
+        addButton = new JButton("Set IP");
         displayArea = new JTextArea();
         displayArea.setEditable(false);
         enterField = new JTextField();
@@ -44,9 +45,9 @@ public class Test extends JFrame implements ActionListener{
         addField.setPreferredSize(new Dimension(300,30));
         pan.add(addField);
         pan.add(addButton);
-        add(pan,BorderLayout.NORTH);
-        add(new JScrollPane(displayArea),BorderLayout.CENTER);
-        add(enterField,BorderLayout.SOUTH);
+        this.add(pan,BorderLayout.NORTH);
+        this.add(new JScrollPane(displayArea),BorderLayout.CENTER);
+        this.add(enterField,BorderLayout.SOUTH);
         addButton.addActionListener(this);
         enterField.addActionListener(new ActionListener()
          {
@@ -111,30 +112,28 @@ private void displayMessage(final String messageToDisplay)
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==addButton)
         {
-        JFrame addingFrame = new JFrame("Add");
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1,1));
-        JLabel label = new JLabel("Enter IP:");
-        JTextField field = new JTextField();
-        panel.add(label);
-        panel.add(field);
-        addingFrame.add(panel);
-        addingFrame.setSize(300,100);
-        addingFrame.setLocation(new Point(750,550));
-        addingFrame.setVisible(true);
-        field.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                names=field.getText();
-                field.setText("");
-                addingFrame.dispose();
-            }                
-        });
             ip = addField.getText();
+            JFrame addingFrame = new JFrame("Add");
+            JPanel panel = new JPanel();
+            panel.setLayout(new GridLayout(1,1));
+            JLabel label = new JLabel("Enter Name:");
+            JTextField field = new JTextField();
+            panel.add(label);
+            panel.add(field);
+            addingFrame.add(panel);
+            addingFrame.setSize(300,100);
+            addingFrame.setResizable(false);
+            addingFrame.setLocation(new Point(750,550));
+            addingFrame.setVisible(true);
+            field.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent e) 
+                {
+                    names=field.getText();
+                    addingFrame.dispose();
+                }                
+            });
         }
-    }
-    public void addFirst()
-    {
     }
 }
